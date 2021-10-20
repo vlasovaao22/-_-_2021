@@ -6,35 +6,61 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+package com.example.demo;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RestController
-public class ApiController {
-    private List<String> messages = new ArrayList<>();
-    @GetMapping("messages")
+class ApiController {
+    private List<String> theme = new ArrayList<String>();
+///curl -X GET http://localhost:8080/messages
+"messages"
     public List<String> getMessages() {
-        return messages;
+        return theme;
     }
-    /* curl -X POST http://localhost:8080/messages -H 'Content-Type:
-   text/plain' -d 'text' */
-    @PostMapping("messages")
+/* curl -X POST http://localhost:8080/messages -H 'Content-Type:
+text/plain' -d 'text' */
+"messages"
     public void addMessage(@RequestBody String text) {
-        messages.add(text);
+        theme.add(text);
     }
-    @GetMapping("messages/{index}")
-    public String getMessage(@PathVariable("index") Integer index) {
-        return messages.get(index);
+/* curl -X POST http://localhost:8080/messages -H 'Content-Type:
+text/plain' -d 'text' */
+"messages/{index}"
+    public String getMessage("index" Integer index) {
+        return theme.get(index);
     }
+    /* curl -X Delete http://localhost:8080/messages -H 'Content-Type:
+    text/plain' -d 'text' */
     @DeleteMapping("messages/{index}")
-    public void deleteText(@PathVariable("index") Integer index) {
-        messages.remove((int) index);
+    public void deleteText("index" Integer index) {
+        theme.remove((int) index);
     }
-    @PutMapping("messages/{index}")
+"messages/{index}"
     public void updateMessage(
-            @PathVariable("index") Integer i,
-            @RequestBody String message) {
-        messages.remove((int) i);
-        messages.add(i, message);
+"index" Integer i,
+@RequestBody String message) {
+        theme.remove((int) i);
+        theme.add(i, message);
+    }
+    /* curl -X Delete http://localhost:8080/messages */
+    @DeleteMapping("messages/{index}")
+    public void DeleteAll() {
+        theme.clear();
+    }
+
+    public Integer ColTheme() {
+        Integer a= theme.size();
+        return a;
+    }
+
+    public List ListTheme() {
+        return theme;
     }
 }
-
-
